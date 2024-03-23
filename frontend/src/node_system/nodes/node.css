@@ -1,0 +1,36 @@
+.node {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 5px;
+    background: white;
+}
+
+/* TODO: Need to figure out how to apply this only to the question label */
+.node label {
+    display: block;
+    font-size: 12px;
+}
+
+.node_text {
+    background: cadetblue;
+    height: 50px;
+    width: auto;
+}
+
+.node_number {
+    background: coral;
+    height: 50px;
+    width: auto;
+}
+
+.node_slider {
+    background: rosybrown;
+    height: auto;
+    width: auto;
+}
+
+.node_multiplechoice {
+    background: cornflowerblue;
+    height: auto;
+    width: auto;
+}

@@ -1,56 +1,28 @@
 import 'reactflow/dist/style.css';
-import ReactFlow, { Background, Controls } from 'reactflow';
+import ReactFlow, { Background, Panel } from 'reactflow';
 import NodeText from './nodes/NodeText';
 import NodeNumber from './nodes/NodeNumber';
 import NodeSlider from './nodes/NodeSlider';
 import NodeMultileChoice from './nodes/NodeMultipleChoice';
 import { useMemo } from 'react';
 
-const nodes = [
-  {
-    id: '1',
-    type: 'input',
-    data: { label: 'Hello' },
-    position: { x: 250, y: 25 }
-  },
-  {
-    id: '2',
-    data: { label: 'World' },
-    position: { x: 100, y: 125 }
-  },
-  {
-    id: '3',
-    type: 'nodeText',
-    data: { text: 'test' },
-    position: { x: 300, y: 125 }
-  },
-  {
-    id: '4',
-    type: 'nodeSlider',
-    data: { text: 'test' },
-    position: { x: 200, y: 250 }
-  },
-  {
-    id: '5',
-    type: 'nodeMultipleChoice',
-    data: { text: 'test' },
-    position: { x: 300, y: 450 }
-  },
-  {
-    id: '6',
-    type: 'nodeNumber',
-    data: { text: 'test' },
-    position: { x: 100, y: 450 }
-  }
-];
+import { useStore } from '../store';
+import { shallow } from 'zustand/shallow';
 
-const edges = [
-  { id: 'e1-2', source: '1', target: '2' },
-  { id: 'e1-3', source: '1', target: '3' }
-];
-
+const selector = (store) => ({ 
+  nodes: store.nodes, 
+  edges: store.edges,
+  onNodeChange: store.onNodeChange, 
+  onNodeDelete: store.onNodeDelete,
+  onEdgeChange: store.onEdgeChange, 
+  onEdgeDelete: store.onEdgeDelete,
+  addEdge: store.addEdge,
+  addNode: store.addNode 
+});
 
 function NodeFlow() {
+  const store = useStore(selector, shallow);
+
     const nodeTypes = useMemo(() => ({ 
         nodeText: NodeText, 
         nodeNumber: NodeNumber, 
@@ -60,9 +32,23 @@ function NodeFlow() {
 
   return (
     <div className="App">
-      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes}>
-        <Background />
-        <Controls />
+      <ReactFlow 
+        nodes={store.nodes} 
+        edges={store.edges}
+        nodeTypes={nodeTypes}
+        onNodesChange={store.onNodeChange}
+        onNodesDelete={store.onNodeDelete}
+        onEdgesChange={store.onEdgeChange}
+        onEdgesDelete={store.onEdgeDelete}
+        onConnect={store.addEdge}
+      >
+        <Panel position="top-right">
+          <button className='panel-button' onClick={() => store.addNode("text")}>Add Text</button>
+          <button className='panel-button' onClick={() => store.addNode("number")}>Add Number</button>
+          <button className='panel-button' onClick={() => store.addNode("slider")}>Add Slider</button>
+          <button className='panel-button' onClick={() => store.addNode("multi")}>Add MultiChoice</button>
+        </Panel>
+        <Background/>
       </ReactFlow> 
     </div>
   );

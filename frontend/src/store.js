@@ -1,5 +1,6 @@
 import { applyEdgeChanges, applyNodeChanges } from 'reactflow';
 import { createWithEqualityFn } from 'zustand/traditional';
+import { nanoid } from 'nanoid';
 
 export const useStore = createWithEqualityFn((set, get) => ({
     nodes: [
@@ -41,8 +42,7 @@ export const useStore = createWithEqualityFn((set, get) => ({
     },
 
     addNode(type) {
-        // TODO: Is this random enough?
-        const id = Math.random().toString();
+        const id = nanoid(6);
         const position = {x: 100, y: 100};
         
         switch (type) {
@@ -80,7 +80,7 @@ export const useStore = createWithEqualityFn((set, get) => ({
     },
 
     addEdge(data) {
-        const id = Math.random().toString();
+        const id = nanoid(6);
         const edge = {id, ...data};
 
         set({edges: [...get().edges, edge]});

@@ -1,19 +1,22 @@
 import 'reactflow/dist/style.css';
 import './node.css';
-import { useCallback } from "react";
 import { Handle, Position } from "reactflow";
+import { useStore } from "../../store";
+import { shallow } from 'zustand/shallow';
 
-function NodeNumber({ text }) {
-    const onChange = useCallback((e) => {
-        console.log("Text changed to: ", e.target.value);
-    }, []);
+const selector = (id) => (store) => ({
+    setQuestion: (question) => store.updateNode([{ id, data: { question } }]),
+});
+
+function NodeNumber({ id, data }) {
+    const { setQuestion } = useStore(selector(id), shallow);
     
     return (
         <div className={"node node_number"}>
             <Handle type="target" position={Position.Top} />
             <div>
                 <label htmlFor="text">Number Question:</label>
-                <input id="text" type="text" value={text} onChange={onChange} className="nodrag" />
+                <input id="text" type="text" value={data.question} onChange={setQuestion} className="nodrag" />
             </div>
             <Handle type="source" position={Position.Bottom} id="a" />
         </div>

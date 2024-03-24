@@ -47,16 +47,16 @@ export const useStore = createWithEqualityFn((set, get) => ({
         
         switch (type) {
             case "text":
-                set({nodes: [...get().nodes, {id, type: 'nodeText', data: {question: 'test'}, position}]})
+                set({nodes: [...get().nodes, {id, type: 'nodeText', data: {question: 'Enter question that requires a text response'}, position}]})
                 break;
             case "number": 
-                set({nodes: [...get().nodes, {id, type: 'nodeNumber', data: {question: 'test'}, position}]})
+                set({nodes: [...get().nodes, {id, type: 'nodeNumber', data: {question: 'Enter a question that requires a number response'}, position}]})
                 break;
             case "slider":
-                set({nodes: [...get().nodes, {id, type: 'nodeSlider', data: {question: 'test'}, position}]})
+                set({nodes: [...get().nodes, {id, type: 'nodeSlider', data: {question: 'Enter a question that requires a range response'}, position}]})
                 break;
             case "multi":
-                set({nodes: [...get().nodes, {id, type: 'nodeMultipleChoice', data: {question: 'test'}, position}]})
+                set({nodes: [...get().nodes, {id, type: 'nodeMultipleChoice', data: {question: 'Enter question that requires selecting an option', choices: []}, position}]})
                 break;
             default:
                 console.error("Invalid node type: ", type);
@@ -67,7 +67,7 @@ export const useStore = createWithEqualityFn((set, get) => ({
         set({
             nodes: get().nodes.map((node) => {
                 if (node.id === id) {
-                    return {...node, data};
+                    return {...node, data: Object.assign(node.data, data)};
                 }
                 return node;
             })

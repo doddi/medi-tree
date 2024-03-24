@@ -5,7 +5,7 @@ import { useStore } from "../../store";
 import { shallow } from 'zustand/shallow';
 
 const selector = (id) => (store) => ({
-    setQuestion: (question) => store.updateNode([{ id, data: { question } }]),
+    setQuestion: (e) => store.updateNode(id, { question: e.target.value }),
 });
 
 function NodeText({ id, data }) {
@@ -16,7 +16,7 @@ function NodeText({ id, data }) {
             <Handle type="target" position={Position.Top} />
             <div>
                 <label htmlFor="text">Text Question:</label>
-                <input id="text" type="text" value={data.question} onChange={setQuestion} className="nodrag" />
+                <textarea id="text" type="text" value={data.question} onChange={setQuestion} className="nodrag" />
             </div>
             <Handle type="source" position={Position.Bottom} id="a" />
         </div>

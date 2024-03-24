@@ -6,17 +6,14 @@ import { useStore } from "../../store";
 import { shallow } from 'zustand/shallow';
 
 const selector = (id) => (store) => ({
-    setQuestion: (question) => store.updateNode([{ id, data: { ...question } }]),
-    setChoices: (choices) => store.updateNode([{ id, data: { ...choices } }]),
+    setQuestion: (e) => store.updateNode(id, { question: e.target.value }),
+    setChoices: (e) => store.updateNode(id, { choices: e }),
 });
 
 function NodeMultipleChoice({ id, data }) {
     const { setQuestion, setChoices } = useStore(selector(id), shallow);
 
-    const onChangeChoice = useCallback((e) => {
-        console.log("Choice changed to: ", e.target.value);
-        setChoice(e.target.value);
-    }, []);
+    const onChangeChoice = useCallback((e) => setChoice(e.target.value), []);
 
     const updateChoices = useCallback((choice) => {
         setChoices([...data.choices, choice]);
@@ -30,7 +27,7 @@ function NodeMultipleChoice({ id, data }) {
             <Handle type="target" position={Position.Top} />
             <div>
                 <label htmlFor="text">Multiple Choice Question:</label>
-                <input id="text" type="text" value={data.question} onChange={setQuestion} className="nodrag" />
+                <textarea id="text" value={data.question} onChange={setQuestion} className="nodrag" />
                 <div>
                     <label>Options:</label>
                     <ul>

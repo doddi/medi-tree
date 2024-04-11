@@ -1,5 +1,5 @@
 import './App.css';
-import NodeFlow from './node_system/NodeFlow';
+import NodeFlow from './pages/NodeFlow';
 
 function App() {
   return (

@@ -18,7 +18,7 @@ function NodeMultipleChoice({ id, data }) {
     const updateChoices = useCallback((choice) => {
         setChoices([...data.choices, choice]);
         setChoice("");
-    }, [data.choices]);
+    }, [data.choices, setChoices]);
 
     const [choice, setChoice] = useState("");
     

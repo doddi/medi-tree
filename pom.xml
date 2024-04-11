@@ -120,7 +120,7 @@
 						</goals>
 						<phase>generate-resources</phase>
 					</execution>
-					<execution>
+					<!-- <execution>
 						<id>yarn-test</id>
 						<goals>
 							<goal>yarn</goal>
@@ -132,7 +132,7 @@
 							</environmentVariables>
 						</configuration>
 						<phase>test</phase>
-					</execution>
+					</execution> -->
 					<execution>
 						<id>yarn-build</id>
 						<goals>

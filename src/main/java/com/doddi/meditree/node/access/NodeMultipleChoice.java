@@ -1,14 +1,16 @@
 package com.doddi.meditree.node.access;
 
-public class NodeMultipleChoice extends Node {
-    private String[] choices;
+import java.util.List;
 
-	public NodeMultipleChoice(String id, Position position, String question, String[] choices) {
+public class NodeMultipleChoice extends Node {
+    private List<String> choices;
+
+	public NodeMultipleChoice(String id, Position position, String question, List<String> choices) {
 		super(id, position, question);
         this.choices = choices;
 	}
 
-    public String[] getChoices() {
+    public List<String> getChoices() {
         return choices;
     }
 }

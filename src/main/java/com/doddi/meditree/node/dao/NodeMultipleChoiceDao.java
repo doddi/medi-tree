@@ -1,23 +1,33 @@
 package com.doddi.meditree.node.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import com.doddi.meditree.node.access.Position;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("MULTIPLE_CHOICE")
 public class NodeMultipleChoiceDao extends NodeDao {
 
-    private ArrayList<String> choices;
-    
-    public ArrayList<String> getChoices() {
-        return choices;
+    @ElementCollection(targetClass = String.class, fetch = jakarta.persistence.FetchType.EAGER)
+    @CollectionTable(name = "node_choices", joinColumns = @jakarta.persistence.JoinColumn(name = "node_id"))
+    @Column(name = "choice", nullable = false)
+    private List<String> choices;
+   
+    public NodeMultipleChoiceDao() {
     }
 
-    public NodeMultipleChoiceDao(int id, com.doddi.meditree.node.dao.NodePosition position, String question, ArrayList<String> choices) {
+    public NodeMultipleChoiceDao(int id, Position position, String question, List<String> choices) {
         super(id, position, question);
         this.choices = choices;
     }
 
-    public NodeMultipleChoiceDao(int id, NodePosition position, String description) {
-        super(id, position, description);
-        this.choices = new ArrayList<>();
+    public List<String> getChoices() {
+        return choices;
     }
-
 }

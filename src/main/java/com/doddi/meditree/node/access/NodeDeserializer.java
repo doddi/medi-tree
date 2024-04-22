@@ -1,6 +1,8 @@
 package com.doddi.meditree.node.access;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -30,7 +32,8 @@ public class NodeDeserializer extends JsonDeserializer<Node> {
             case TEXT:
                 return new NodeText(id, position, question);
             case MULTIPLE_CHOICE:
-                String[] choices = mapper.treeToValue(dataNode.get("choices"), String[].class);
+                String[] choicesArray = mapper.treeToValue(dataNode.get("choices"), String[].class);
+                List<String> choices = Arrays.asList(choicesArray);
 				return new NodeMultipleChoice(id, position, question, choices);
             case SLIDER:
                 String minTree = dataNode.get("min").toString();

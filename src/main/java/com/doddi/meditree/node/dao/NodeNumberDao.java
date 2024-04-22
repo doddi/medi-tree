@@ -6,13 +6,13 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("TEXT")
-public class NodeTextDao extends NodeDao {
+@DiscriminatorValue("NUMBER")
+public class NodeNumberDao extends NodeDao {
 
-    public NodeTextDao() {
+    public NodeNumberDao() {
     }
 
-    public NodeTextDao(int id, Position position, String question) {
+    public NodeNumberDao(int id, Position position, String question) {
         super(id, position, question);
     }
 }

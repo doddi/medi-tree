@@ -8,11 +8,11 @@ public record Edge(String id, String source, String target, String label) {
         return new EdgeDao(id, source, target, label);
     }
 
-    public static Edge toPublicEdge(EdgeDao edge) {
-        return new Edge(edge.identification(), edge.source(), edge.target(), edge.label());
+    public static Edge fromDao(EdgeDao edge) {
+        return new Edge(edge.getIdentification(), edge.getSource(), edge.getTarget(), edge.getLabel());
     }
 
-    public static EdgeDao toEdge(Edge publicEdge) {
+    public static EdgeDao toDao(Edge publicEdge) {
         return new EdgeDao(publicEdge.id(), publicEdge.source(), publicEdge.target(), publicEdge.label());
     }
 }

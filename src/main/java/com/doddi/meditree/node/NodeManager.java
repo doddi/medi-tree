@@ -3,7 +3,6 @@ package com.doddi.meditree.node;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.doddi.meditree.node.dao.EdgeDao;
 import com.doddi.meditree.node.dao.NodeDao;

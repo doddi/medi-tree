@@ -3,7 +3,6 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Design from './pages/Design';
 import Run from './pages/Run';
-import NodeFlow from './components/NodeFlow';
 
 function App() {
   return (

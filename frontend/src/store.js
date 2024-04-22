@@ -7,11 +7,21 @@ export const useStore = createWithEqualityFn((set, get) => ({
     edges: [],
 
     loading: true,
+    currentSourceId: null,
+
     setLoading(loading) {
         set({loading: loading});
     },
     isLoading() {
         return get().loading;
+    },
+
+    setCurrentSourceId(id) {
+        console.log("Setting current source id to: ", id);
+        set({currentSourceId: id});
+    },
+    getCurrentSourceId() {
+        return get().currentSourceId;
     },
 
     onNodeChange(changes) {

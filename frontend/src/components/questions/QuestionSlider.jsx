@@ -18,13 +18,14 @@ function QuestionSlider({ node }) {
 
         var edges = getEdgesWithSourceId(getCurrentSourceId());
         // Only get the first element of the array if it exists
-        var edge = edges.length > 0 ? edges[0] : null;
-        if (edge.length == 0) {
+        if (edges.length == 0) {
             console.log("No more questions");
+            return;
         }
-        else if (edge.length == 1) {
-            console.log("Next question is: ", edge.target);
-            setCurrentSourceId(edge.target);
+        else if (edges.length == 1) {
+            console.log("Next question is: ", edges[0].target);
+            setCurrentSourceId(edges[0].target);
+            return;
         }
         else {
           // Check if any edge labels are within the value of the slider
@@ -34,11 +35,22 @@ function QuestionSlider({ node }) {
           for (var i = 0; i < edgesWithLabel.length; i++) {
             var edge = edgesWithLabel[i];
             var label = edge.label;
-            var range = label.split("-");
-            if (range.length == 2) {
-              var min = parseInt(range[0]);
-              var max = parseInt(range[1]);
-              if (value >= min && value <= max) {
+
+            if (label.includes("-")) {
+              var range = label.split("-");
+              if (range.length == 2) {
+                var min = parseInt(range[0]);
+                var max = parseInt(range[1]);
+                if (value >= min && value <= max) {
+                  console.log("Next question is: ", edge.target);
+                  setCurrentSourceId(edge.target);
+                  return;
+                }
+              }
+            }
+            else {
+              var number = parseInt(label);
+              if (value == number) {
                 console.log("Next question is: ", edge.target);
                 setCurrentSourceId(edge.target);
                 return;

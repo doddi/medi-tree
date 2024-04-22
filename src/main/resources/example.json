@@ -50,6 +50,28 @@
                 "x": 100,
                 "y": 550
             }
+        },
+        {
+            "id": "5",
+            "type": "NUMBER",
+            "data": {
+                "question": "other number question"
+            },
+            "position": {
+                "x": 100,
+                "y": 1000
+            }
+        },
+        {
+            "id": "6",
+            "type": "NUMBER",
+            "data": {
+                "question": "alternative number question"
+            },
+            "position": {
+                "x": 400,
+                "y": 1000
+            }
         }
     ],
     "edges": [
@@ -68,6 +90,17 @@
             "id": "e2-3",
             "source": "2",
             "target": "3"
+        },
+        {
+            "id": "e3-5",
+            "source": "3",
+            "target": "5",
+            "label": "0" 
+        },
+        {
+            "id": "e3-6",
+            "source": "3",
+            "target": "6"
         }
     ]
 }

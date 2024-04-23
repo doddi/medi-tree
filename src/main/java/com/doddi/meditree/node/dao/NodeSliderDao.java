@@ -15,8 +15,8 @@ public class NodeSliderDao extends NodeDao {
     public NodeSliderDao() {
     }
     
-    public NodeSliderDao(final int id, final Position position, final String question, final int min, final int max, final int step) {
-        super(id, position, question);
+    public NodeSliderDao(final String identification, final Position position, final String question, final int min, final int max, final int step) {
+        super(identification, position, question);
         this.min = min;
         this.max = max;
         this.step = step;
@@ -32,5 +32,17 @@ public class NodeSliderDao extends NodeDao {
 
     public int getStep() {
         return step;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
     }
 }

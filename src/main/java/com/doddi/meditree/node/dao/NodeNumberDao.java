@@ -12,7 +12,7 @@ public class NodeNumberDao extends NodeDao {
     public NodeNumberDao() {
     }
 
-    public NodeNumberDao(int id, Position position, String question) {
-        super(id, position, question);
+    public NodeNumberDao(String identification, Position position, String question) {
+        super(identification, position, question);
     }
 }

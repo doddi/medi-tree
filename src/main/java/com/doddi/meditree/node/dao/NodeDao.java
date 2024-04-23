@@ -18,7 +18,7 @@ public class NodeDao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int identification;
+    private String identification;
     private int position_x;
     private int position_y;
     private String question;
@@ -26,14 +26,14 @@ public class NodeDao {
     public NodeDao() {
     }
 
-    public NodeDao(final int identification, final Position position, final String question) {
+    public NodeDao(final String identification, final Position position, final String question) {
         this.identification = identification;
         this.position_x = position.x();
         this.position_y = position.y();
         this.question = question;
     }
 
-    public int getIdentification() {
+    public String getIdentification() {
         return identification;
     }
 
@@ -52,4 +52,25 @@ public class NodeDao {
     public int getPosition_y() {
         return position_y;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
+
+    public void setPosition_x(int position_x) {
+        this.position_x = position_x;
+    }
+
+    public void setPosition_y(int position_y) {
+        this.position_y = position_y;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
 }

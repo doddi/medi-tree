@@ -22,12 +22,17 @@ public class NodeMultipleChoiceDao extends NodeDao {
     public NodeMultipleChoiceDao() {
     }
 
-    public NodeMultipleChoiceDao(int id, Position position, String question, List<String> choices) {
-        super(id, position, question);
+    public NodeMultipleChoiceDao(String identification, Position position, String question, List<String> choices) {
+        super(identification, position, question);
         this.choices = choices;
     }
 
     public List<String> getChoices() {
         return choices;
+    }
+
+    public void setChoices(List<String> choices) {
+        this.choices.clear();
+        this.choices.addAll(choices);
     }
 }

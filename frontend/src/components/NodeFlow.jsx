@@ -45,6 +45,21 @@ function NodeFlow() {
     fetchNodes();
   }, [setNodes, setEdges, setLoading]);
 
+  function saveNodeSystem(nodes, edges) {
+    fetch('http://localhost:8080/api/nodes', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nodes, edges }),
+    })
+      .then(response => response.json())
+      .then(data => console.log('Success:', data))
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
   const nodeTypes = useMemo(() => ({ 
       TEXT: NodeText, 
       NUMBER: NodeNumber, 
@@ -72,6 +87,7 @@ function NodeFlow() {
             <button className='panel-button' onClick={() => store.addNode("number")}>Add Number</button>
             <button className='panel-button' onClick={() => store.addNode("slider")}>Add Slider</button>
             <button className='panel-button' onClick={() => store.addNode("multi")}>Add MultiChoice</button>
+            <button className='panel-button' onClick={() => saveNodeSystem(store.nodes, store.edges)}>Save</button>
           </Panel>
           <Background/>
         </ReactFlow> 

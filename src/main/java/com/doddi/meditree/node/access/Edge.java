@@ -15,4 +15,10 @@ public record Edge(String id, String source, String target, String label) {
     public static EdgeDao toDao(Edge publicEdge) {
         return new EdgeDao(publicEdge.id(), publicEdge.source(), publicEdge.target(), publicEdge.label());
     }
+
+    public static void updateDao(Edge edge, EdgeDao edgeDao) {
+        edgeDao.setSource(edge.source());
+        edgeDao.setTarget(edge.target());
+        edgeDao.setLabel(edge.label());
+    }
 }

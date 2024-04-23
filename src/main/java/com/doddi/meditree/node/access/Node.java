@@ -48,4 +48,38 @@ public class Node {
 
         throw new IllegalArgumentException("Unknown type: " + node.getClass());
     }
+
+    public static NodeDao toDao(Node node) {
+        if (node instanceof NodeMultipleChoice) {
+            NodeMultipleChoice nodeMultipleChoice = (NodeMultipleChoice) node;
+            return new NodeMultipleChoiceDao(node.getId(), node.getPosition(), node.getQuestion(), nodeMultipleChoice.getChoices());
+        } else if (node instanceof NodeSlider) {
+            NodeSlider nodeSlider = (NodeSlider) node;
+            return new NodeSliderDao(node.getId(), node.getPosition(), node.getQuestion(), nodeSlider.getMin(), nodeSlider.getMax(), nodeSlider.getStep());
+        } else if (node instanceof NodeText) {
+            return new NodeTextDao(node.getId(), node.getPosition(), node.getQuestion());
+        } else if (node instanceof NodeNumber) {
+            return new NodeNumberDao(node.getId(), node.getPosition(), node.getQuestion());
+        }
+
+        throw new IllegalArgumentException("Unknown type: " + node.getClass());
+    }
+
+    public static void updateDao(Node node, NodeDao nodeDao) {
+        nodeDao.setPosition_x(node.getPosition().x());
+        nodeDao.setPosition_y(node.getPosition().y());
+        nodeDao.setQuestion(node.getQuestion());
+
+        if (node instanceof NodeMultipleChoice) {
+            NodeMultipleChoice nodeMultipleChoice = (NodeMultipleChoice) node;
+            NodeMultipleChoiceDao nodeMultipleChoiceDao = (NodeMultipleChoiceDao) nodeDao;
+            nodeMultipleChoiceDao.setChoices(nodeMultipleChoice.getChoices());
+        } else if (node instanceof NodeSlider) {
+            NodeSlider nodeSlider = (NodeSlider) node;
+            NodeSliderDao nodeSliderDao = (NodeSliderDao) nodeDao;
+            nodeSliderDao.setMin(nodeSlider.getMin());
+            nodeSliderDao.setMax(nodeSlider.getMax());
+            nodeSliderDao.setStep(nodeSlider.getStep());
+        }
+    }
 }

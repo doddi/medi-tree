@@ -33,7 +33,8 @@ function Run() {
   useEffect(() => {
     const fetchNodes = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/nodes');
+        const response = await fetch('http://medi-tree-latest.onrender.com/api/nodes');
+        // const response = await fetch('http://localhost:8080/api/nodes');
         const data = await response.json();
         setNodes(data.nodes);
         setEdges(data.edges);

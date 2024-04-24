@@ -32,7 +32,8 @@ function NodeFlow() {
   useEffect(() => {
     const fetchNodes = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/nodes');
+        // const response = await fetch('http://localhost:8080/api/nodes');
+        const response = await fetch('http://medi-tree-latest.onrender.com/api/nodes');
         const data = await response.json();
         setNodes(data.nodes);
         setEdges(data.edges);
@@ -46,7 +47,8 @@ function NodeFlow() {
   }, [setNodes, setEdges, setLoading]);
 
   function saveNodeSystem(nodes, edges) {
-    fetch('http://localhost:8080/api/nodes', {
+    // fetch('http://localhost:8080/api/nodes', {
+    fetch('http://medi-tree-latest.onrender.com/api/nodes', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

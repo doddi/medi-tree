@@ -9,6 +9,14 @@ if (module.hot) {
   module.hot.accept();
 }
 
+export function getApiUrl() {
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:8080/api/nodes';
+  } else {
+    return 'https://medi-tree-latest.onrender.com/api/nodes';
+  }
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

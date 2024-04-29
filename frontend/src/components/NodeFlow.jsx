@@ -9,6 +9,7 @@ import { useMemo, useEffect } from 'react';
 
 import { useStore } from '../store';
 import { shallow } from 'zustand/shallow';
+import { getApiUrl } from '..';
 
 const selector = (store) => ({ 
   nodes: store.nodes, 
@@ -23,20 +24,21 @@ const selector = (store) => ({
   setEdges: store.setEdges,
   loading: store.loading,
   setLoading: store.setLoading,
+  setCurrentSourceId: store.setCurrentSourceId,
 });
 
 function NodeFlow() {
   const store = useStore(selector, shallow);
-  const { setNodes, setEdges, setLoading } = store;
+  const { setNodes, setEdges, setLoading, setCurrentSourceId } = store;
 
   useEffect(() => {
     const fetchNodes = async () => {
       try {
-        // const response = await fetch('http://localhost:8080/api/nodes');
-        const response = await fetch('http://medi-tree-latest.onrender.com/api/nodes');
+        const response = await fetch(getApiUrl());
         const data = await response.json();
         setNodes(data.nodes);
         setEdges(data.edges);
+        setCurrentSourceId(data.nodes[0].id);
       } catch (error) {
         console.error("Error fetching nodes:", error);
       } finally {
@@ -44,11 +46,10 @@ function NodeFlow() {
       }
     };
     fetchNodes();
-  }, [setNodes, setEdges, setLoading]);
+  }, [setNodes, setEdges, setLoading, setCurrentSourceId]);
 
   function saveNodeSystem(nodes, edges) {
-    // fetch('http://localhost:8080/api/nodes', {
-    fetch('http://medi-tree-latest.onrender.com/api/nodes', {
+    fetch(getApiUrl(), {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

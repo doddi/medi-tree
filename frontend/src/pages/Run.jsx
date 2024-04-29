@@ -7,6 +7,7 @@ import QuestionMultipleChoice from "../components/questions/QuestionMultipleChoi
 import QuestionNumber from "../components/questions/QuestionNumber";
 import QuestionSlider from "../components/questions/QuestionSlider";
 import QuestionText from "../components/questions/QuestionText";
+import { getApiUrl } from "..";
 
 const selector = (store) => ({ 
   nodes: store.nodes, 
@@ -33,8 +34,7 @@ function Run() {
   useEffect(() => {
     const fetchNodes = async () => {
       try {
-        const response = await fetch('http://medi-tree-latest.onrender.com/api/nodes');
-        // const response = await fetch('http://localhost:8080/api/nodes');
+        const response = await fetch(getApiUrl());
         const data = await response.json();
         setNodes(data.nodes);
         setEdges(data.edges);
@@ -54,6 +54,7 @@ function Run() {
   }
 
   function displayNodeWithId(id) {
+    console.log("Displaying node with id: ", id);
     var node = getNodeWithId(id);
     switch (node.type) {
       case "TEXT":
